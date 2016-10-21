@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="virtualcrit" content="">
+    <meta name="aaron@virtualcrit.com" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Virtual Crit</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bs/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="jumbotron-narrow.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a href="index.html">Home</a></li>
+                    <li role="presentation"><a href="videos.html">Videos</a></li>
+                    <li role="presentation"><a href="contact.html">Contact</a></li>
+                    <li role="presentation"><a href="tandc.html">Legal</a></li>
+                    <li role="presentation" class="active"><a href="leaders.html">Leaders</a></li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Leaderboard</h3>
+        </div>
+
+
+<h2>Today's Leaders</h2>
+  <p>
+<!--      <button id="btn1" type="button" class="btn btn-primary"> Refresh </button>-->
+        </p>
+  <table class="table table-bordered table-striped">
+      
+
+      
+    <thead>
+      <tr>
+        <th>Competition</th>
+        <th>Rider</th>
+        <th>Score</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sprint Crit Effort</td>
+        <td id="td1"></td>
+        <td id="td2">% of MAX Heartrate</td>
+      </tr>
+      <tr>
+        <td>Sprint Crit Speed</td>
+        <td id="td3"></td>
+        <td id="td4">Miles per Hour</td>
+      </tr>
+      <tr>
+        <td>Average Daily Effort</td>
+        <td id="td5"></td>
+        <td id="td6">% of MAX Heartrate</td>
+      </tr>
+      <tr>
+        <td>Average Daily Speed</td>
+        <td id="td7"></td>
+        <td id="td8">Miles per Hour</td>
+      </tr>
+    </tbody>
+  </table>
+        
+        <p>
+        <ul class="list-group">
+            <h4>Today's Totals</h4>
+          <li id = "li1" class="list-group-item col-lg-6">Rounds Completed <span id = "li1n" class="badge"></span></li>
+          <li id = "li2" class="list-group-item col-lg-6">Unique Riders <span id = "li2n" class="badge"></span></li> 
+        </ul>
+        </p>
+
+        <footer class="footer">
+            <p>&copy; 2016 GRAYBEARD FITNESS LLC</p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bs/js/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.js"></script>
+    
+    
+    <script>
+//DATE FUNCTION
+var today = new Date();
+var dd = today.getDate().toString();
+var mm = (today.getMonth() + 1).toString(); //January is 0!
+var yyyy = today.getFullYear().toString();
+if (dd < 10) {
+		dd = '0' + dd;
+}
+if (mm < 10) {
+		mm = '0' + mm;
+}
+var pubFullDate = yyyy + mm + dd;
+var pubFullTime = _.now();
+var pubMonth = mm;
+var pubDay = dd;
+var pubYear = yyyy;
+var dataSizeLeaders;
+        
+        
+function getTotals() {
+	$.getJSON('https://virtualcrit-47b94.firebaseio.com/totals/' + pubFullDate + '.json', function(data) {
+
+
+		var xTotals1 = _.values(data);
+		var xTotals2 = _.orderBy(xTotals1, 'a_scoreHRTotal', 'desc');
+		//console.log('xTotals2:  ' + JSON.stringify(xTotals2));
+		var total_effort_leader = xTotals2[0].fb_timName;
+        var total_effort_leader_score = xTotals2[0].a_scoreHRTotal;
+        totalSize = _.size(xTotals2);
+        $('#li2n').text(totalSize);
+
+		var xTotals3 = _.orderBy(xTotals1, 'a_speedTotal', 'desc');
+		//console.log('xTotals3:  ' + JSON.stringify(xTotals3));
+		var total_speed_leader = xTotals3[0].fb_timName;
+        var total_speed_leader_score = xTotals3[0].a_speedTotal;
+
+		 console.log('total_effort_leader ' + total_effort_leader, total_effort_leader_score);
+         console.log('total_speed_leader ' + total_speed_leader, total_speed_leader_score);
+        
+        $('#td5').text(total_effort_leader);$('#td6').text(total_effort_leader_score + ' % of MAX HR');
+        $('#td7').text(total_speed_leader);$('#td8').text(total_speed_leader_score + ' Mph');
+
+		//dataSizeLeaders = _.size(xTotals2);
+		//console.log('Size of Totals:  ' + dataSizeLeaders);
+
+	});
+}
+        
+        
+        function getRounds() {
+	$.getJSON('https://virtualcrit-47b94.firebaseio.com/rounds/' + pubFullDate + '.json', function(data) {
+
+
+		var xTotals1 = _.values(data);
+		var xTotals2 = _.orderBy(xTotals1, 'a_scoreRoundLast', 'desc');
+		//console.log('xTotals2:  ' + JSON.stringify(xTotals2));
+		var round_effort_leader = xTotals2[0].fb_timName;
+        var round_effort_leader_score = xTotals2[0].a_scoreRoundLast;
+        roundSize = _.size(xTotals2);
+        
+        $('#li1n').text(roundSize);
+
+		var xTotals3 = _.orderBy(xTotals1, 'a_speedRoundLast', 'desc');
+		//console.log('xTotals3:  ' + JSON.stringify(xTotals3));
+		var round_speed_leader = xTotals3[0].fb_timName;
+        var round_speed_leader_score = xTotals3[0].a_speedRoundLast;
+
+		 console.log('round_effort_leader ' + round_effort_leader, round_effort_leader_score);
+         console.log('round_speed_leader ' + round_speed_leader, round_speed_leader_score);
+
+        $('#td1').text(round_effort_leader);$('#td2').text(round_effort_leader_score + ' % of MAX HR');
+        $('#td3').text(round_speed_leader);$('#td4').text(round_speed_leader_score + ' Mph');
+
+
+	});
+}
+        
+        
+    
+function startChecking() {
+       console.log('refresh');
+       getTotals();
+       getRounds();
+       
+       setInterval(function(){ console.log('refresh');getRounds();getTotals(); }, 15000);
+}
+        
+        
+    
+       $('#btn1').on('click', function(e) {
+	console.log('refresh');
+       getTotals();
+       getRounds();
+       
+       setInterval(function(){ getRounds();getTotals(); }, 30000);
+    }); 
+    
+    
+</script>
+    
+    <body onload="startChecking()">
+    
+    
+    
+</body>
+
+</html>

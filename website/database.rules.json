@@ -1,0 +1,8 @@
+{
+  "rules": {
+    ".read": "true",
+    ".write": "true",
+    "rounds": {"$date1": {".indexOn": "fb_RND"}},
+    "totals": {"$date2": {".indexOn": "a_scoreHRTotal"}}
+  }
+}
