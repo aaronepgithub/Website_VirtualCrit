@@ -175,17 +175,41 @@ function getTotals() {
 
         $('#td5').text(total_effort_leader);$('#td6').text(total_effort_leader_score + ' % of MAX HR');
         $('#td7').text(total_speed_leader);$('#td8').text(total_speed_leader_score + ' Mph');
+	});
+}
 
-		//dataSizeLeaders = _.size(xTotals2);
-		//console.log('Size of Totals:  ' + dataSizeLeaders);
+function getTotalsRun() {
+	$.getJSON('https://virtualcrit-47b94.firebaseio.com/totals/run/' + pubFullDate + '.json', function(data) {
 
+
+		var xTotals1 = _.values(data);
+		var xTotals2 = _.orderBy(xTotals1, 'a_scoreHRTotal', 'desc');
+		//console.log('xTotals2:  ' + JSON.stringify(xTotals2));
+		var total_effort_leader = xTotals2[0].fb_timName;
+        var total_effort_leader_score = xTotals2[0].a_scoreHRTotal;
+        total_effort_leader_score = Math.round(total_effort_leader_score);
+        // totalSize = _.size(xTotals2);
+        // $('#li2n').text(totalSize);
+
+		var xTotals3 = _.orderBy(xTotals1, 'a_speedTotal', 'desc');
+		//console.log('xTotals3:  ' + JSON.stringify(xTotals3));
+		var total_speed_leader = xTotals3[0].fb_timName;
+        var total_speed_leader_score = xTotals3[0].a_speedTotal;
+        total_speed_leader_score = Math.round(total_speed_leader_score);
+
+		 console.log('total_effort_leader ' + total_effort_leader, total_effort_leader_score);
+         console.log('total_speed_leader ' + total_speed_leader, total_speed_leader_score);
+
+        $('#td5r').text(total_effort_leader);$('#td6r').text(total_effort_leader_score + ' % of MAX HR');
+        $('#td7r').text(total_speed_leader);$('#td8r').text(total_speed_leader_score + ' Mph');
 	});
 }
 
 
-        function getRounds() {
-	$.getJSON('https://virtualcrit-47b94.firebaseio.com/rounds/' + pubFullDate + '.json', function(data) {
 
+
+  function getRounds() {
+	   $.getJSON('https://virtualcrit-47b94.firebaseio.com/rounds/' + pubFullDate + '.json', function(data) {
 
 		var xTotals1 = _.values(data);
 		var xTotals2 = _.orderBy(xTotals1, 'a_scoreRoundLast', 'desc');
@@ -203,8 +227,8 @@ function getTotals() {
         var round_speed_leader_score = xTotals3[0].a_speedRoundLast;
         round_speed_leader_score = Math.round(round_speed_leader_score);
 
-		 console.log('round_effort_leader ' + round_effort_leader, round_effort_leader_score);
-         console.log('round_speed_leader ' + round_speed_leader, round_speed_leader_score);
+		 console.log('round_effort_leader Run ' + round_effort_leader, round_effort_leader_score);
+         console.log('round_speed_leader Run ' + round_speed_leader, round_speed_leader_score);
 
         $('#td1').text(round_effort_leader);$('#td2').text(round_effort_leader_score + ' % of MAX HR');
         $('#td3').text(round_speed_leader);$('#td4').text(round_speed_leader_score + ' Mph');
@@ -213,14 +237,45 @@ function getTotals() {
 	});
 }
 
+function getRoundsRun() {
+   $.getJSON('https://virtualcrit-47b94.firebaseio.com/rounds/run/' + pubFullDate + '.json', function(data) {
+
+  var xTotals1 = _.values(data);
+  var xTotals2 = _.orderBy(xTotals1, 'a_scoreRoundLast', 'desc');
+  //console.log('xTotals2:  ' + JSON.stringify(xTotals2));
+  var round_effort_leader = xTotals2[0].fb_timName;
+      var round_effort_leader_score = xTotals2[0].a_scoreRoundLast;
+      round_effort_leader_score = Math.round(round_effort_leader_score);
+
+      // roundSize = _.size(xTotals2);
+      // $('#li1n').text(roundSize);
+
+  var xTotals3 = _.orderBy(xTotals1, 'a_speedRoundLast', 'desc');
+  //console.log('xTotals3:  ' + JSON.stringify(xTotals3));
+  var round_speed_leader = xTotals3[0].fb_timName;
+      var round_speed_leader_score = xTotals3[0].a_speedRoundLast;
+      round_speed_leader_score = Math.round(round_speed_leader_score);
+
+   console.log('round_effort_leader Run ' + round_effort_leader, round_effort_leader_score);
+       console.log('round_speed_leader Run ' + round_speed_leader, round_speed_leader_score);
+
+      $('#td1r').text(round_effort_leader);$('#td2r').text(round_effort_leader_score + ' % of MAX HR');
+      $('#td3r').text(round_speed_leader);$('#td4r').text(round_speed_leader_score + ' Mph');
+
+
+});
+}
+
 
 
 function startChecking() {
        console.log('refresh');
        getTotals();
        getRounds();
+       getTotalsRun();
+       getRoundsRun();
 
-       setInterval(function(){ console.log('refresh');getRounds();getTotals(); }, 15000);
+       setInterval(function(){ console.log('refresh');getRounds();getTotals();getTotalsRun();getRoundsRun();}, 15000);
 }
 
 
@@ -229,6 +284,8 @@ function startChecking() {
 	console.log('refresh');
        getTotals();
        getRounds();
+       getTotalsRun();
+       getRoundsRun();
 
        setInterval(function(){ getRounds();getTotals(); }, 30000);
     });
