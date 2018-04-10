@@ -1,0 +1,41 @@
+[debug] [2018-04-10T11:22:56.424Z] ----------------------------------------------------------------------
+[debug] [2018-04-10T11:22:56.427Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2018-04-10T11:22:56.427Z] CLI Version:   3.18.2
+[debug] [2018-04-10T11:22:56.427Z] Platform:      darwin
+[debug] [2018-04-10T11:22:56.427Z] Node Version:  v8.11.1
+[debug] [2018-04-10T11:22:56.428Z] Time:          Tue Apr 10 2018 07:22:56 GMT-0400 (EDT)
+[debug] [2018-04-10T11:22:56.428Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-10T11:22:56.444Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-10T11:22:56.444Z] > authorizing via signed-in user
+[debug] [2018-04-10T11:22:56.446Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-04-10T11:22:56.447Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/6xroVTzBwQknCSkXQnmxC98wxNrF6Kwn1meTnYAR5rU',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Apr 10 2018 07:22:56 GMT-0400 (EDT)
+[debug] [2018-04-10T11:22:56.666Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-10T11:22:56.675Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/virtualcrit-47b94  
+  
+ Tue Apr 10 2018 07:22:56 GMT-0400 (EDT)
+[debug] [2018-04-10T11:22:57.324Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-10T11:22:57.326Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/virtualcrit-47b94/tokens  
+  
+ Tue Apr 10 2018 07:22:57 GMT-0400 (EDT)
+[debug] [2018-04-10T11:22:57.698Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-10T11:22:57.699Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/virtualcrit-47b94  
+  
+ Tue Apr 10 2018 07:22:57 GMT-0400 (EDT)
+[debug] [2018-04-10T11:22:58.089Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/aaronep/Desktop/DEV/Website_VirtualCrit/website'...
+[info] 
+[debug] [2018-04-10T11:22:58.092Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/454506348897/clients/_:getWebAppConfig  
+  
+ Tue Apr 10 2018 07:22:58 GMT-0400 (EDT)
+[debug] [2018-04-10T11:22:58.650Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
