@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="virtualcrit" content="">
+    <meta name="aaron@virtualcrit.com" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Virtual Crit</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bs/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="jumbotron-narrow.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a href="index.html">Home</a></li>
+                    <li role="presentation"><a href="howto.html">How-to</a></li>
+                    <li role="presentation" class="active"><a href="activecrits.html">Active Crits</a></li>
+                    <li role="presentation"><a href="contact.html">Contact</a></li>
+                    <li role="presentation"><a href="tandc.html">Legal</a></li>
+                    <li role="presentation"><a href="videos.html">How-to (V1)</a></li>
+                    <li role="presentation"><a href="leaders.html">Leaders (V1)</a></li>
+                </ul>
+            </nav>
+            <!-- <h3 class="text-muted">Active Crits</h3> -->
+        </div>
+
+
+<!-- <h2>Active Crits</h2> -->
+  <p>
+<!--      <button id="btn1" type="button" class="btn btn-primary"> Refresh </button>-->
+        </p>
+  <table class="table table-bordered table-striped">
+
+
+
+    <thead>
+      <tr>
+        <th><h2>Active Crits</h2></th>
+        <!-- <th>Rider</th>
+        <th>Score</th> -->
+      </tr>
+    </thead>
+
+
+    <tbody>
+      <tr id="tr1">
+        <td id="td1"></td>
+      </tr>
+      <!-- <tr>
+        <td>Sprint Crit Speed (BIKE)</td>
+        <td id="td3"></td>
+        <td id="td4">Miles per Hour</td>
+      </tr> -->
+      <!-- <tr>
+        <td>Average Daily Effort (BIKE)</td>
+        <td id="td5"></td>
+        <td id="td6">% of MAX Heartrate</td>
+      </tr>
+      <tr>
+        <td>Average Daily Speed (BIKE)</td>
+        <td id="td7"></td>
+        <td id="td8">Miles per Hour</td>
+      </tr> -->
+    </tbody>
+
+    <!-- <tbody>
+      <tr>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>Sprint Crit Effort (RUN)</td>
+        <td id="td1r"></td>
+        <td id="td2r">% of MAX Heartrate</td>
+      </tr>
+      <tr>
+        <td>Sprint Crit Speed (RUN)</td>
+        <td id="td3r"></td>
+        <td id="td4r">Miles per Hour</td>
+      </tr>
+      <tr>
+        <td>Average Daily Effort (RUN)</td>
+        <td id="td5r"></td>
+        <td id="td6r">% of MAX Heartrate</td>
+      </tr>
+      <tr>
+        <td>Average Daily Speed (RUN)</td>
+        <td id="td7r"></td>
+        <td id="td8r">Miles per Hour</td>
+      </tr>
+    </tbody> -->
+
+
+  </table>
+
+
+
+
+
+        <!-- <p>
+        <ul class="list-group">
+            <h4>Today's Totals</h4>
+          <li id = "li1" class="list-group-item col-lg-6">Rounds Completed <span id = "li1n" class="badge"></span></li>
+          <li id = "li2" class="list-group-item col-lg-6">Unique Riders <span id = "li2n" class="badge"></span></li>
+        </ul>
+        </p> -->
+
+        <footer class="footer">
+            <p>&copy; 2019 GRAYBEARD FITNESS LLC</p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bs/js/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.js"></script>
+
+
+
+
+    <script>
+
+//ACTIVE CRITS
+//https://virtualcrit-47b94.firebaseio.com/race.json?shallow=true&print=pretty
+//ordered Alpha
+//https://virtualcrit-47b94.firebaseio.com/race.json?orderBy=%22$key%22&print=pretty
+
+//DATE FUNCTION
+// var today = new Date();
+// var dd = today.getDate().toString();
+// var mm = (today.getMonth() + 1).toString(); //January is 0!
+// var yyyy = today.getFullYear().toString();
+// if (dd < 10) {
+// 		dd = '0' + dd;
+// }
+// if (mm < 10) {
+// 		mm = '0' + mm;
+// }
+// var pubFullDate = yyyy + mm + dd;
+// var pubFullTime = _.now();
+// var pubMonth = mm;
+// var pubDay = dd;
+// var pubYear = yyyy;
+// var dataSizeLeaders;
+
+var allString = "";
+function getCrits() {
+
+	// $.getJSON('https://virtualcrit-47b94.firebaseio.com/totals/' + pubFullDate + '.json', function(data) {
+    $.getJSON('https://virtualcrit-47b94.firebaseio.com/race.json?&shallow=true&print=pretty', function(data) {
+
+    var allData = _.keys(data);
+    var allDataSorted = _.sortBy(allData)
+    var totalSize = _.size(allData);
+
+
+    // _.each(allData, function(x){
+      _.each(allDataSorted, function(x){
+       allString += "<h4>"+x + "</h4>";
+     });
+    // console.log(allString);
+    console.log(totalSize);
+    console.log(JSON.stringify(allData));
+    // $('#td1').text(JSON.stringify(allData));
+    dispAllString();
+    })
+
+
+
+  }
+
+function dispAllString() {
+  console.log("allString: " + allString);
+  $('#td1').html(allString);
+}
+
+
+
+
+    //    $('#btn1').on('click', function(e) {
+	  //       console.log('refresh');
+    //       getCrits()
+    //    setInterval(function(){ getCrits(); }, 30000);
+    // });
+
+
+</script>
+
+    <body onload="getCrits()">
+
+
+
+</body>
+
+</html>

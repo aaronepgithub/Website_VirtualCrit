@@ -25,14 +25,16 @@
         <div class="header clearfix">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation"><a href="index.html">Home</a></li>
-                    <li role="presentation"><a href="videos.html">How-to</a></li>
-                    <li role="presentation"><a href="contact.html">Contact</a></li>
-                    <li role="presentation"><a href="tandc.html">Legal</a></li>
-                    <li role="presentation" class="active"><a href="leaders.html">Leaders</a></li>
+                  <li role="presentation"><a href="index.html">Home</a></li>
+                  <li role="presentation"><a href="howto.html">How-to</a></li>
+                  <li role="presentation"><a href="activecrits.html">Active Crits</a></li>
+                  <li role="presentation"><a href="contact.html">Contact</a></li>
+                  <li role="presentation"><a href="tandc.html">Legal</a></li>
+                  <li role="presentation"><a href="videos.html">How-to (V1)</a></li>
+                  <li role="presentation" class="active"><a href="leaders.html">Leaders (V1)</a></li>
                 </ul>
             </nav>
-            <h3 class="text-muted">Leaderboard</h3>
+            <!-- <h3 class="text-muted">Leaderboard</h3> -->
         </div>
 
 
@@ -117,7 +119,7 @@
         </p>
 
         <footer class="footer">
-            <p>&copy; 2018 GRAYBEARD FITNESS LLC</p>
+            <p>&copy; 2019 GRAYBEARD FITNESS LLC</p>
         </footer>
 
     </div>
@@ -131,7 +133,15 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.js"></script>
 
 
+
+
     <script>
+
+//ACTIVE CRITS
+//https://virtualcrit-47b94.firebaseio.com/race.json?shallow=true&print=pretty
+//ordered Alpha
+//https://virtualcrit-47b94.firebaseio.com/race.json?orderBy=%22$key%22&print=pretty
+
 //DATE FUNCTION
 var today = new Date();
 var dd = today.getDate().toString();
