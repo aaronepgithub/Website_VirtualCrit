@@ -27,13 +27,13 @@
 
 
 
-    <style>
+    <!-- <style>
         #laptimes {
             border: 1px solid #ddd;
             padding: 10px;
             width: 200px;
         }
-    </style>
+    </style> -->
     <script>
         window.onload = function() {
 
@@ -45,12 +45,39 @@
 
             var timer = new Tock({
                 callback: function () {
-                    $('#clockface').val(timer.msToTime(timer.lap()));
-                    $('#cycletime').val(timer.msToTime(timer.lap()-timeAtLapStart));
+
+
+                  function sec2time(timeInSeconds) {
+                      var pad = function(num, size) { return ('000' + num).slice(size * -1); },
+                      time = parseFloat(timeInSeconds).toFixed(3),
+                      hours = Math.floor(time / 60 / 60),
+                      minutes = Math.floor(time / 60) % 60,
+                      seconds = Math.floor(time - minutes * 60),
+                      milliseconds = time.slice(-3);
+
+                      return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2) + ',' + pad(milliseconds, 1);
+                  }
+
+                    // $('#clockface').val(timer.msToTime(timer.lap()));
+                    $('#clockface').val(sec2time((timer.lap()/1000)));
+
+
+                    //CHANGE TO COUNTDOWN
+                    // $('#cycletime').val(timer.msToTime(timer.lap()-timeAtLapStart));
+                    //$('#cycletime').val(timer.msToTime((autoLapMilliSecondInterval*autoLapInterval)-timer.lap()));
+
+                    var interTime = ((autoLapMilliSecondInterval*autoLapInterval)-timer.lap())/1000;
+                    $('#cycletime').val(sec2time(interTime));
+
+
+
 
                     if(timer.lap()>=(autoLapMilliSecondInterval*autoLapInterval)) {
                       autoLapInterval+=1;
-                      $('#laptimes').append(timer.msToTime(timer.lap()) + '<br>');
+
+                      //$('#laptimes').append(timer.msToTimecode(timer.lap()) + '<br>');
+
+
                       $('#lapsComplete').html((autoLapInterval-1) + ' Cycles Complete');
                       timeAtLapStart = timer.lap();
 
@@ -86,7 +113,7 @@
             $('#reset').on('click', function () {
                 timer.reset();
                 $('#clockface').val('');
-                $('#laptimes').html('');
+                //$('#laptimes').html('');
                 $('#cycletime').val('');
                 $('#lapsComplete').html('');
 
@@ -155,19 +182,22 @@
 </head>
 
 <body>
+
+  <div class="container">
     <h1>ESBBT</h1>
     <!-- <p>
         by <a href="http://github.com/mrchimp/tock"></a>
     </p> -->
 
-    <section>
+    <!-- <section> -->
+      <div>
         <!-- <h2>Timer</h2> -->
         <p>
             <button id="start">Start</button>
             <!-- <button id="lap">Lap</button> -->
-            <button id="pause">Pause</button>
+            <!-- <button id="pause">Pause</button> -->
             <button id="stop">Stop</button>
-            <button id="reset">Reset</button>
+            <!-- <button id="reset">Reset</button> -->
         </p>
 
         <p>
@@ -177,13 +207,13 @@
 
 
         <p>
-          <h4>Total Time</h4>
-            <input id="clockface" placeholder="00:00:00">
+          <h4>Total Time [hh:mm:ss,ms]</h4>
+            <input id="clockface" placeholder="00:00:00,0">
         </p>
 
         <p>
-          <h4>Time in Current Cycle</h4>
-            <input id="cycletime" placeholder="00:00:00">
+          <h4>Time in Current Cycle [hh:mm:ss,ms]</h4>
+            <input id="cycletime" placeholder="00:00:00,0">
         </p>
 
 
@@ -193,11 +223,15 @@
             </h4>
         </p>
 
-        <p>
+        <button id="reset">Reset</button>
+
+        <!-- <p>
           <h4>Cycle Times</h4>
             <div id="laptimes"></div>
-        </p>
-    </section>
+        </p> -->
+
+      </div>
+    <!-- </section> -->
 
     <!-- <section>
         <h2>Countdown</h2>
@@ -215,6 +249,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="tock.js"></script>
 
-
+</div>
 </body>
 </html>
