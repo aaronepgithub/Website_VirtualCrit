@@ -44,7 +44,7 @@
         button.xlFont {
           font-size: x-large;
           border-color: black;
-          margin: 10px;
+          margin: 20px;
           font-weight: bold;
         }
         /* p.xlFont {
@@ -104,7 +104,8 @@
 
                       // return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2) + ',' + pad(milliseconds, 1);
                       // return pad(minutes, 2) + ':' + pad(seconds, 2) + ',' + pad(milliseconds, 1);
-                      return pad(seconds, 2);
+                      // return pad(seconds, 2);
+                      return pad(seconds, 2) + '.' + pad(milliseconds, 1);
                   }
 
 
@@ -273,7 +274,7 @@
 
 
         <p>
-            <h2>Seconds per Cycle</h2>
+            <h2>Enter 75% of Intensity Time</h2>
             <input id="inputIntervalSeconds" class="xlFont"></input>
         </p>
 
@@ -288,13 +289,13 @@
 
 
         <p>
-          <h2>Time to Limitation[ss]</h2>
-          <input id="clockfaceInSeconds" placeholder="00" class="xlFont">
+          <h2>Time to Limitation [ss]</h2>
+          <input id="clockfaceInSeconds" placeholder="00.0" class="xlFont">
         </p>
 <hr style="width: 100%; background-color: black; height: 1px; border-color : transparent;" />
         <p>
-          <h2>Time left in Cycle [ss]</h2>
-          <input id="cycletime" placeholder="00" class="xlFont">
+          <h2>Time Left In Cycle [ss]</h2>
+          <input id="cycletime" placeholder="00.0" class="xlFont">
         </p>
 <hr style="width: 100%; background-color: black; height: 1px; border-color : transparent;" />
 
