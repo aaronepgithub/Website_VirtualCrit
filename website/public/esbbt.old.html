@@ -74,7 +74,6 @@
 
             $('#inputIntervalSeconds').val("10.5");
             $('#clockface').hide();
-            $('#stop').hide();
 
             var timer = new Tock({
                 callback: function () {
@@ -159,8 +158,6 @@
               pausedBool = 0;
               beep();
               $('#start').hide();
-              $('#stop').show();
-              $('#stop').text('STOP');
             });
 
             // $('#lap').on('click', function () {
@@ -197,8 +194,7 @@
                 timeAtLapStart = 0;
                 $('#start').show();
                 isPaused = 0;
-                // $('#stop').text('STOP');
-                $('#stop').hide();
+                $('#stop').text('STOP');
             });
 
             // var countdown = Tock({
@@ -300,19 +296,23 @@
         <!-- </p> -->
 <!-- <hr style="width: 100%; background-color: black; height: 1px; border-color : transparent;" /> -->
 
-<p>
-  <h2>Time Left In Cycle [ss]</h2>
-  <input id="cycletime" placeholder="00.0" class="xlFont">
-</p>
+
+
+        <p>
+          <h2>Time Left In Cycle [ss]</h2>
+          <input id="cycletime" placeholder="00.0" class="xlFont">
+        </p>
+
 
 
 <hr style="width: 100%; background-color: black; height: 1px; border-color : transparent;" />
 
+      <p>
+        <h2>Time to Limitation [ss]</h2>
+        <input id="clockfaceInSeconds" placeholder="00.0" class="xlFont">
+      </p>
 
-<p>
-  <h2>Time to Limitation [ss]</h2>
-  <input id="clockfaceInSeconds" placeholder="00.0" class="xlFont">
-</p>
+
 
 
 <hr style="width: 100%; background-color: black; height: 1px; border-color : transparent;" />
